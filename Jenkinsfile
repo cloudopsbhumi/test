@@ -1,27 +1,23 @@
 pipeline {
   agent any
-    tools {
-        nodejs "nodejs"
-    }
     stages {
         stage('checkout') {
-		agent {
-		  lable 'jenkins-agent'
+	     agent { 
+    		label 'jenkins-agent'
 		}
             steps {
-                
-                git branch: 'main', url: 'https://github.com/arsh-ash/Portfolio-website.git'
-			    stash 'source'
-			    echo 'stash is successfull'
+		git branch: 'main', url: 'https://github.com/mangesh16cloud/jenkinspipeline.git'
+		stash 'source'
+		echo 'stash successful'
             }
         }
-        stage('build npm') {
+	
+        stage('build') {
+	    
             steps {
-                unstash 'source'
-                echo 'unstash is successfull'
-               
+		unstash 'source'
+                echo 'Hello World'
             }
-	}
-        
+        }
     }
 }
