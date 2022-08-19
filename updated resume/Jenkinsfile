@@ -21,7 +21,7 @@ pipeline {
                 echo 'unstash successful'
         }
         }
-        stage ('npm build phase UNDER CONSTRUCTION') {
+        stage ('npm build server UNDER CONSTRUCTION') {
             steps{
                 unstash 'source'
                 echo 'unstash is successfull'
