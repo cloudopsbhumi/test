@@ -5,9 +5,6 @@ pipeline {
     }
     stages {
         stage('SCM checkout server') {
-	     agent { 
-    		label 'jenkins-agent'
-		}
             steps {
 		checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/arsh-ash/Portfolio-website.git']]])
 		
@@ -16,10 +13,13 @@ pipeline {
         }
 	
         stage('next VM ') {
+		agent { 
+    		label 'jenkins-agent'
+		}
             steps {
                 unstash 'source'
                 echo 'unstash successful'
-        }
+            }
         }
         stage ('npm build server') {
             steps{
