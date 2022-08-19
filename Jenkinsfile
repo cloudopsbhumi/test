@@ -5,7 +5,9 @@ pipeline {
     }
     stages {
         stage('checkout') {
-	      
+		agent {
+		  lable 'jenkins-agent'
+		}
             steps {
                 
                 git branch: 'main', url: 'https://github.com/arsh-ash/Portfolio-website.git'
