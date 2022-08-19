@@ -1,50 +1,25 @@
 pipeline {
   agent any
-  tools {
+    tools {
         nodejs "nodejs"
     }
     stages {
-        stage('SCM checkout server') {
+        stage('checkout') {
+	      
             steps {
-		checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/arsh-ash/Portfolio-website.git']]])
-		
-		stash 'source'
+                
+                git branch: 'main', url: 'https://github.com/arsh-ash/Portfolio-website.git'
+			    stash 'source'
+			    echo 'stash is successfull'
             }
         }
-	
-        stage('next VM ') {
-		agent { 
-    		label 'jenkins-agent'
-		}
+        stage('build npm') {
             steps {
                 unstash 'source'
-                echo 'unstash successful'
-            }
-        }
-        stage ('npm build server') {
-            steps{
-                unstash 'source'
                 echo 'unstash is successfull'
-                sh 'npm -v'
-                echo 'node build successfull'
+               
             }
-        }
-        stage ('manual test phase  UNDER CONSTRUCTION') {
-            steps{
-                unstash 'source'
-                echo 'unstash is successfull'
-                sh 'npm -v'
-                echo 'node build perform here'
-            }
-        }
-        stage ('docker-image phase for version control UNDER CONSTRUCTION') {
-            steps{
-                
-                echo 'docker images build here'
-                
-                
-            }
-        }
+	}
+        
     }
-    
 }
