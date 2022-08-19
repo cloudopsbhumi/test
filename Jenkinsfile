@@ -1,7 +1,7 @@
 pipeline {
   agent any
     stages {
-        stage('checkout') {
+        stage('SCM checkout') {
 	     agent { 
     		label 'jenkins-agent'
 		}
@@ -12,7 +12,7 @@ pipeline {
             }
         }
 	
-        stage('build') {
+        stage('npm build') {
 	    
             steps {
 		unstash 'source'
